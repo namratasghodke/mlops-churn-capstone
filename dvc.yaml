@@ -1,0 +1,8 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv
+    - src/preprocess.py
+    outs:
+    - data/processed
