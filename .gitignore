@@ -1,0 +1,79 @@
+# -----------------------------
+# Python and Virtual Environment
+# -----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env/
+.venv/
+venv/
+env/
+*.log
+
+# -----------------------------
+# Jupyter Notebook checkpoints
+# -----------------------------
+.ipynb_checkpoints/
+
+# -----------------------------
+# Data files (handled by DVC)
+# -----------------------------
+data/raw/
+data/processed/
+data/interim/
+data/external/
+
+# -----------------------------
+# DVC cache and local runs
+# -----------------------------
+.dvc/cache/
+.dvc/tmp/
+.dvc/plots/
+.dvc/experiments/
+
+# -----------------------------
+# Model artifacts
+# -----------------------------
+models/
+artifacts/
+checkpoints/
+*.h5
+*.pt
+*.pkl
+*.joblib
+*.sav
+
+# -----------------------------
+# Output / Generated files
+# -----------------------------
+reports/
+results/
+outputs/
+logs/
+notebooks/generated/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+envs/
+env/
+.venv/
+
+# Data
+data/raw/
+data/processed/
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Docker
+*.env
+*.log
+
+# VSCode
+.vscode/

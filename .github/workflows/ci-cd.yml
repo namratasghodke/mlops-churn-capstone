@@ -1,9 +1,51 @@
-name: CI/CD
+name: MLOps CI
 
-on: [push]
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
+      # 1. Checkout repo
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. Setup Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.13
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest mlflow scikit-learn pandas flake8
+
+      # 4. Run preprocessing
+      - name: Run preprocessing
+        run: python src/preprocessing/preprocess.py
+
+      # 5. Train model (MLflow tracking set to local folder)
+      - name: Train model
+        run: |
+          python -c "import mlflow; mlflow.set_tracking_uri('file://./mlruns')"
+          python src/training/train.py
+
+      # 6. Run tests
+      - name: Run Pytest
+        run: pytest tests/ -v
+
+      # 7. Lint code
+      - name: Lint code
+        run: flake8 src/ tests/
+
+      # 8. Check train.py import
+      - name: Check train.py import
+        run: python -c "import src.training.train; print('train.py imported successfully')"
